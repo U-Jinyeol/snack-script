@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authSignIn, authSignUp } from "./controller.js";
-import { signInValidation } from "./services.js";
+import { authSignIn, authSignUp } from "../controller/auth.controller.js";
+import { signInValidation } from "../services/auth.service.js";
 
 const auth = Router();
 

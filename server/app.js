@@ -1,7 +1,7 @@
 import express from "express";
-import connect from "./database/mongodb.js";
 import cors from "cors";
-import api from "./api/router.js";
+import connect from "./models/index.js";
+import api from "./routes/index.js";
 
 const app = express();
 const port = 8080;

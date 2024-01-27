@@ -1,8 +1,9 @@
-import Auth from "./schema.js";
+import Auth from "../models/auth.model.js";
 import * as argon2 from "argon2";
+import { getUserByUsernameRepository } from "../repositories/auth.repository.js";
 
 export const signInService = async (email, password) => {
-  const user = await Auth.findOne({ email });
+  const user = getUserByUsernameRepository();
 
   if (!user) {
     throw new Error("이메일 또는 패스워드가 틀렸습니다.");
@@ -22,7 +23,7 @@ export const signInService = async (email, password) => {
 };
 
 export const signUpService = async (email, password, confirm_password) => {
-  const user = await Auth.findOne({ email });
+  const user = getUserByUsernameRepository();
 
   if (user) {
     throw new Error("이미 가입된 이메일입니다.");
