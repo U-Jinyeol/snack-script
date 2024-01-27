@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "prettier/prettier": [
+    "error",
+    {
+      "arrowSpacing": ["error", { "before": true, "after": true }],
+      "singleQuote": true,
+      "semi": false,
+      "useTabs": false,
+      "tabWidth": 2,
+      "trailingComma": "none",
+      "printWidth": 80,
+      "bracketSpacing": true,
+      "arrowParens": "always",
+      "endOfLine": "auto"
+    }
+  ]
 }
