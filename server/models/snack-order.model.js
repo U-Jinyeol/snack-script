@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const SnackOrderSchema = new mongoose.Schema({
-  no: {
-    type: Number,
-    required: true,
-  },
   created_at: {
     type: String,
     required: true,
@@ -32,6 +28,10 @@ const SnackOrderSchema = new mongoose.Schema({
   snack_name: {
     type: String,
     required: true,
+  },
+  updated_memo: {
+    type: String,
+    required: false,
   },
 });
 

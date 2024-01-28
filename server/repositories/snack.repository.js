@@ -10,19 +10,21 @@ const createSnackOrder = async (newSnackOrder) => {
 
 const getSnackOrderList = async (page, size, getSnackOrderListQuery) => {
   try {
+    const totalCount = await SnackOrder.countDocuments(getSnackOrderListQuery);
+
     const snackOrderList = await SnackOrder.find(getSnackOrderListQuery)
       .skip((page - 1) * size)
       .limit(size);
 
-    return snackOrderList;
+    return { snackOrderList, totalCount };
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-const updateOrderStatus = async (order_id, status) => {
+const updateOrderStatus = async (updateQuery) => {
   try {
-    await SnackOrder.findOneAndUpdate({ order_id }, { status }, { new: true });
+    await SnackOrder.findOneAndUpdate({ order_id }, updateQuery, { new: true });
   } catch (error) {
     throw new Error(error.message);
   }

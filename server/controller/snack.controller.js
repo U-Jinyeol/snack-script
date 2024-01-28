@@ -2,16 +2,15 @@ import snackOrderService from "../services/snack.service.js";
 
 const createSnackOrder = async (req, res, next) => {
   try {
-    const { snackName, orderUrl, orderer } = req.body;
+    const { snackName, orderUrl } = req.body;
     const newSnackOrder = await snackOrderService.createSnackOrder(
       snackName,
-      orderUrl,
-      orderer
+      orderUrl
     );
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      message: "Snack order created successfully",
-      data: newSnackOrder,
+      message: "SUCCESS",
+      code: 0,
     });
   } catch (error) {
     next(error);
@@ -20,19 +19,19 @@ const createSnackOrder = async (req, res, next) => {
 
 const getSnackOrderList = async (req, res, next) => {
   try {
-    const { page, size, startAt, endAt, orderer, status } = req.query;
+    const { page, size, startAt, endAt, status } = req.query;
     const snackOrderList = await snackOrderService.getSnackOrderList(
       page,
       size,
       startAt,
       endAt,
-      orderer,
       status
     );
     res.status(200).json({
       success: true,
-      message: "Snack order list fetched successfully",
+      message: "SUCCESS",
       data: snackOrderList,
+      code: 0,
     });
   } catch (error) {
     next(error);
@@ -41,11 +40,13 @@ const getSnackOrderList = async (req, res, next) => {
 
 const updateOrderStatus = async (req, res, next) => {
   try {
-    const { order_id, status } = req.body;
-    await snackOrderService.updateOrderStatus(order_id, status);
-    res
-      .status(200)
-      .json({ success: true, message: "Order status updated successfully" });
+    const { order_id, status, updated_memo } = req.body;
+    await snackOrderService.updateOrderStatus(order_id, status, updated_memo);
+    res.status(200).json({
+      success: true,
+      message: "SUCCESS",
+      code: 0,
+    });
   } catch (error) {
     next(error);
   }
