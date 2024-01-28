@@ -45,7 +45,7 @@ const OrderForm = ({ onSubmit }: MainProps) => {
   };
 
   return (
-    <Section title={sectionTitle} backgroundColor="bg-black">
+    <Section title={sectionTitle}>
       <MacbookAnimation />
 
       <form

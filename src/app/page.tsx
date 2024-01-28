@@ -55,7 +55,7 @@ const Main = () => {
       <div className="flex flex-col gap-y-20px">
         <MainBanner />
         <MainOrderForm onSubmit={handleSubmit} />
-        <MainOrderList orderList={orderList} />
+        <MainOrderList getOrderList={getSnackOrderList} orderList={orderList} />
         <Pagination
           currentPage={currentPage}
           size={CONSTANT.defaultSize}

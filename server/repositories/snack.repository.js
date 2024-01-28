@@ -22,9 +22,11 @@ const getSnackOrderList = async (page, size, getSnackOrderListQuery) => {
   }
 };
 
-const updateOrderStatus = async (updateQuery) => {
+const updateOrderStatus = async (order_id, updateQuery) => {
   try {
-    await SnackOrder.findOneAndUpdate({ order_id }, updateQuery, { new: true });
+    return await SnackOrder.findOneAndUpdate({ order_id }, updateQuery, {
+      new: true,
+    });
   } catch (error) {
     throw new Error(error.message);
   }

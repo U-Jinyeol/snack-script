@@ -30,15 +30,14 @@ export type GetSnackOrderListResponse = HttpResponse & {
   data?: { snackOrderList: GetSnackOrderListResponseData; totalCount: number };
 };
 
-export type UpdateSnackOrderStateBody = {
+export type UpdateSnackOrderStatusBody = {
   order_id: string;
   status: number;
-  updated_memo: string;
+  updated_memo?: string;
 };
 
 export enum OrderStatus {
   OrderChecking = 1, // 주문 확인중
   PaymentCompleted = 2, // 결제 완료
-  ArrivalCompleted = 3, // 도착 완료
-  OrderCancelled = 4, // 주문 취소
+  OrderCancelled = 3, // 주문 취소
 }

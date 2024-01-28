@@ -5,8 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 export const orderStatus = {
   OrderChecking: 1, // 주문 확인중
   PaymentCompleted: 2, // 주문 완료
-  ArrivalCompleted: 3, // 도착완료
-  OrderCancelled: 4, // 주문 취소
+  OrderCancelled: 3, // 주문 취소
 };
 
 const createSnackOrder = async (snackName, orderUrl) => {
@@ -67,14 +66,17 @@ const updateOrderStatus = async (order_id, status, updated_memo) => {
   const koreanDate = new Date(currentDate.getTime() + 9 * 60 * 60 * 1000);
   const formattedDate = koreanDate.toISOString();
 
-  let updateQuery = { order_id, status, updated_at: formattedDate };
+  let updateQuery = {
+    status,
+    updated_at: formattedDate,
+  };
 
   if (updated_memo) {
     updateQuery.updated_memo = updated_memo;
   }
 
   try {
-    await snackOrderRepository.updateOrderStatus(updateQuery);
+    await snackOrderRepository.updateOrderStatus(order_id, updateQuery);
   } catch (error) {
     throw new Error(error.message);
   }

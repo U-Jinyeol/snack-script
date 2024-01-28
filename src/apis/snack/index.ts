@@ -3,7 +3,7 @@ import {
   GetSnackOrderListRequestQuery,
   GetSnackOrderListResponse,
   OrderSnackRequestBody,
-  UpdateSnackOrderStateBody,
+  UpdateSnackOrderStatusBody,
 } from "./type";
 import { showSuccessAlert, showErrorAlert } from "@/utils/alert";
 
@@ -35,18 +35,18 @@ export const _getSnackOrderList = async (
   }
 };
 
-export const _updateSnackOrderState = async (
-  updateSnackOrderStateBody: UpdateSnackOrderStateBody
+export const _updateSnackOrderStatus = async (
+  updateSnackOrderStatusBody: UpdateSnackOrderStatusBody
 ): Promise<HttpResponse | null> => {
   try {
     const response = await client.put(
-      "/snack/order/list",
-      updateSnackOrderStateBody
+      "/snack/order/status",
+      updateSnackOrderStatusBody
     );
     showSuccessAlert({ text: "상태 변경에 성공하셨습니다." });
     return response;
   } catch (error) {
-    showErrorAlert({ text: "주문 리스트 불러오기 실패" });
+    showErrorAlert({ text: "상태 변경 실패" });
     return null;
   }
 };
