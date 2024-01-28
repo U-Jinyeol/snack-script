@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/layouts/Header";
-import SideBar from "@/layouts/SideBar";
 import "windi.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <SideBar />
-        <main className="w-full pl-64 pr-4 py-20">{children}</main>
+        <main className="w-full pr-4 py-20">{children}</main>
       </body>
     </html>
   );

@@ -1,12 +1,13 @@
 import type { Plugin } from "windicss/types/interfaces";
 import { defineConfig } from "windicss/helpers";
-// import typography from "windicss/plugin/typography";
-// import aspectRatio from "windicss/plugin/aspect-ratio";
+import typography from "windicss/plugin/typography";
+import aspectRatio from "windicss/plugin/aspect-ratio";
 
-// const plugins: Plugin[] = [typography as Plugin, aspectRatio as Plugin];
+const plugins: Plugin[] = [typography as Plugin, aspectRatio as Plugin];
 
 export default defineConfig({
   darkMode: "class",
+  plugins: plugins,
   extract: {
     include: ["**/*.{jsx,tsx,css}"],
     exclude: ["node_modules", ".git", ".next"],
@@ -18,6 +19,7 @@ export default defineConfig({
           DEFAULT: "#58C9B9",
           100: "#9DC8C8",
           200: "#519D9E",
+          300: "#0b0",
         },
         purple: {
           DEFAULT: "#D1B6E1",

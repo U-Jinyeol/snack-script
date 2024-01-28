@@ -1,0 +1,18 @@
+.n-pagination {
+  @apply flex justify-center items-center text-sm text-gray-100;
+  .item {
+    @apply flex justify-center items-center cursor-pointer h-6 w-6 rounded hover:(bg-green-300);
+  }
+
+  .number-wrap {
+    @apply flex gap-x-8px mx-24px;
+  }
+
+  .active {
+    @apply text-green-300;
+  }
+
+  button:disabled {
+    @apply opacity-30;
+  }
+}
