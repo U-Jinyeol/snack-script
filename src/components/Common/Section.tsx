@@ -9,7 +9,7 @@ type SectionProps = {
 const Section = ({ children, title, backgroundColor }: SectionProps) => {
   return (
     <div
-      className={`p-24px h-full w-full rounded-16px ${
+      className={`p-24px h-full w-full ${
         backgroundColor ? backgroundColor : ""
       }`}
     >

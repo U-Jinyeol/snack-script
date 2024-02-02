@@ -53,7 +53,7 @@ const OrderList = ({ orderList, getOrderList }: OrderListProps) => {
             <th>No</th>
             <th>주문일</th>
             <th>상품명</th>
-            <th>상품 URL</th>
+            <th>구매 링크</th>
             <th>주문자</th>
             <th>주문 상태</th>
           </tr>
@@ -78,9 +78,7 @@ const OrderList = ({ orderList, getOrderList }: OrderListProps) => {
               <td>
                 <div className="flex items-center justify-center">
                   <div
-                    className={`p-1 rounded-md ${
-                      convertStatusText(order.status).color
-                    }`}
+                    className={`p-1 ${convertStatusText(order.status).color}`}
                   >
                     {convertStatusText(order.status).text}
                   </div>

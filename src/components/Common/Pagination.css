@@ -1,7 +1,7 @@
 .n-pagination {
   @apply flex justify-center items-center text-sm text-gray-100;
   .item {
-    @apply flex justify-center items-center cursor-pointer h-6 w-6 rounded hover:(bg-green-300);
+    @apply flex justify-center items-center cursor-pointer h-6 w-6 hover:(bg-green-300);
   }
 
   .number-wrap {

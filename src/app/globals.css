@@ -24,9 +24,17 @@ body {
 th,
 td,
 tr {
-  border: 1px solid;
+  @apply border border-gray-500;
 }
 
 * {
   font-family: "Courier New", Courier, monospace;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: green !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

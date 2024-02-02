@@ -7,6 +7,7 @@ import Input from "../Common/Input";
 import { showWarningAlert } from "@/utils/alert";
 import { OrderSnackRequestBody } from "@/apis/snack/type";
 import MacbookAnimation from "../Common/MacbookAnimation";
+import CommonButton from "../Common/Button";
 
 type MainProps = {
   onSubmit: (orderSnackBody: OrderSnackRequestBody) => void;
@@ -73,12 +74,7 @@ const OrderForm = ({ onSubmit }: MainProps) => {
             onChange={handleSnackLinkChange}
           />
         </div>
-        <button
-          type="submit"
-          className="max-w-260px bg-gray-500 text-white py-2 px-4 rounded hover:bg-green-300"
-        >
-          Submit
-        </button>
+        <CommonButton type="submit" label="Submit" className="max-w-260px" />
       </form>
     </Section>
   );
