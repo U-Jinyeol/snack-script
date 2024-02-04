@@ -1,32 +1,40 @@
-import { signInService, signUpService } from "../services/auth.service.js";
+import authService from "../services/auth.service.js";
 
-export const authSignIn = async (req, res, next) => {
+const signIn = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const token = await signInService(email, password);
+    const token = await authService.signIn(email, password);
 
-    return next({ ok: true, message: "SUCCESS", data: token, code: 0 });
-  } catch (error) {
-    return next({
-      ok: false,
-      message: "로그인에 실패하였습니다.",
-      code: 10000,
+    res.status(200).json({
+      success: true,
+      message: "SUCCESS",
+      data: token,
+      code: 0,
     });
+  } catch (error) {
+    next(error);
   }
 };
 
-export const authSignUp = async (req, res, next) => {
+const createUser = async (req, res, next) => {
   const { email, password, confirm_password } = req.body;
 
   try {
-    await signUpService(email, password, confirm_password);
-    return next({ ok: true, message: "SUCCESS", code: 0 });
-  } catch (error) {
-    return next({
-      ok: false,
-      message: "회원가입에 실패하였습니다.",
-      code: 10001,
+    const result = await authService.createUser(
+      email,
+      password,
+      confirm_password
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "SUCCESS",
+      code: 0,
     });
+  } catch (error) {
+    next(error);
   }
 };
+
+export default { signIn, createUser };

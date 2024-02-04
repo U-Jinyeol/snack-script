@@ -10,9 +10,9 @@ const AuthSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userId: {
+  level: {
     type: String,
-    unique: true,
+    default: "USER",
   },
 });
 

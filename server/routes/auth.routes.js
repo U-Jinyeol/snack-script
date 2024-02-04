@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { authSignIn, authSignUp } from "../controller/auth.controller.js";
-import { signInValidation } from "../services/auth.service.js";
+import authController from "../controller/auth.controller.js";
+import authService from "../services/auth.service.js";
 
 const auth = Router();
 
-auth.post("/signin", signInValidation, authSignIn);
-auth.post("/signup", authSignUp);
+auth.post("/signin", authService.signInValidation, authController.signIn);
+auth.post("/signup", authController.createUser);
 
 export default auth;

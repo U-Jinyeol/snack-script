@@ -1,20 +1,22 @@
 import Auth from "../models/auth.model.js";
 import * as argon2 from "argon2";
-import { getUserByUsernameRepository } from "../repositories/auth.repository.js";
+import jwt from "jsonwebtoken";
+import authRepository from "../repositories/auth.repository.js";
 
-export const signInService = async (email, password) => {
-  const user = getUserByUsernameRepository();
-
+const signIn = async (email, password) => {
+  const user = await authRepository.getUserByUsername(email);
   if (!user) {
     throw new Error("이메일 또는 패스워드가 틀렸습니다.");
   }
 
   const isVerified = await argon2.verify(user.password, password);
+
   if (!isVerified) {
     throw new Error("이메일 또는 패스워드가 틀렸습니다.");
   }
 
   const token = createAccessToken(user.email);
+  console.log("token: ", token);
   if (!token) {
     throw new Error("토큰 생성 실패");
   }
@@ -22,8 +24,8 @@ export const signInService = async (email, password) => {
   return { token };
 };
 
-export const signUpService = async (email, password, confirm_password) => {
-  const user = getUserByUsernameRepository();
+const createUser = async (email, password) => {
+  const user = await authRepository.getUserByUsername(email);
 
   if (user) {
     throw new Error("이미 가입된 이메일입니다.");
@@ -34,22 +36,21 @@ export const signUpService = async (email, password, confirm_password) => {
   const newUser = new Auth({
     email: email,
     password: hashPassword,
+    level: "USER",
   });
 
-  await newUser.save();
-
-  return true;
+  return authRepository.createUser(newUser);
 };
 
-export const createAccessToken = (id) => {
-  const accessToken = jwt.sign({ id: id }, process.env.JWT_SECRET, {
+const createAccessToken = (email) => {
+  const accessToken = jwt.sign({ email }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 
   return accessToken;
 };
 
-export const signInValidation = (req, res, next) => {
+const signInValidation = (req, res, next) => {
   const { email, password } = req.body;
   const emailRegExp =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -61,3 +62,5 @@ export const signInValidation = (req, res, next) => {
   }
   next();
 };
+
+export default { signIn, createUser, signInValidation };

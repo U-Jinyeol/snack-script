@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Auth from "../api/auth/schema";
+import Auth from "../models/auth.model.js";
 
 export const authMiddleware = (req, res, next) => {
   const { authorization } = req.headers;
@@ -13,8 +13,8 @@ export const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const { userId } = jwt.verify(authToken, process.env.JWT_SECRET);
-    User.findById(userId).then((user) => {
+    const { email } = jwt.verify(authToken, process.env.JWT_SECRET);
+    Auth.findOne({ email: email }).then((user) => {
       res.locals.user = user;
       next();
     });

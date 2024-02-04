@@ -3,10 +3,10 @@ import snackOrderService from "../services/snack.service.js";
 const createSnackOrder = async (req, res, next) => {
   try {
     const { snackName, orderUrl } = req.body;
-    const newSnackOrder = await snackOrderService.createSnackOrder(
-      snackName,
-      orderUrl
-    );
+
+    const { email } = res.locals.user;
+
+    await snackOrderService.createSnackOrder(snackName, orderUrl, email);
     res.status(200).json({
       success: true,
       message: "SUCCESS",
@@ -41,7 +41,14 @@ const getSnackOrderList = async (req, res, next) => {
 const updateOrderStatus = async (req, res, next) => {
   try {
     const { order_id, status, updated_memo } = req.body;
-    await snackOrderService.updateOrderStatus(order_id, status, updated_memo);
+    const { email } = res.locals.user;
+
+    await snackOrderService.updateOrderStatus(
+      order_id,
+      status,
+      updated_memo,
+      email
+    );
     res.status(200).json({
       success: true,
       message: "SUCCESS",

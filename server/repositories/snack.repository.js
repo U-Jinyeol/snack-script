@@ -13,6 +13,7 @@ const getSnackOrderList = async (page, size, getSnackOrderListQuery) => {
     const totalCount = await SnackOrder.countDocuments(getSnackOrderListQuery);
 
     const snackOrderList = await SnackOrder.find(getSnackOrderListQuery)
+      .sort({ created_at: -1 })
       .skip((page - 1) * size)
       .limit(size);
 
