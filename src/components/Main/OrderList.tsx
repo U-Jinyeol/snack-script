@@ -59,59 +59,67 @@ const OrderList = ({ orderList, getOrderList }: OrderListProps) => {
           </tr>
         </thead>
         <tbody>
-          {orderList.map((order, index) => (
-            <tr key={order.order_id}>
-              <td>{index + 1}</td>
-              <td>{formatDate(order.created_at)}</td>
-              <td>{order.snack_name}</td>
-              <td className="text-left max-w-xs px-2 whitespace-nowrap truncate">
-                <a
-                  href={order.order_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-blue-800"
-                >
-                  {order.order_url}
-                </a>
-              </td>
-              <td>{order.orderer}</td>
-              <td>
-                <div className="flex items-center justify-center">
-                  <div
-                    className={`p-1 ${convertStatusText(order.status).color}`}
+          {orderList?.length > 0 ? (
+            orderList.map((order, index) => (
+              <tr key={order.order_id}>
+                <td>{index + 1}</td>
+                <td>{formatDate(order.created_at)}</td>
+                <td>{order.snack_name}</td>
+                <td className="text-left max-w-xs px-2 whitespace-nowrap truncate">
+                  <a
+                    href={order.order_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-800"
                   >
-                    {convertStatusText(order.status).text}
-                  </div>
-                  {order.status === OrderStatus.OrderChecking && (
-                    <div className="flex gap-1">
-                      <MdCancel
-                        onClick={() => {
-                          updateStatus(
-                            order.order_id,
-                            OrderStatus.OrderCancelled
-                          );
-                        }}
-                        color="red"
-                        size={20}
-                        className="cursor-pointer hover:opacity-75"
-                      />
-                      <MdCheckCircle
-                        onClick={() => {
-                          updateStatus(
-                            order.order_id,
-                            OrderStatus.PaymentCompleted
-                          );
-                        }}
-                        color="green"
-                        size={20}
-                        className="cursor-pointer hover:opacity-75"
-                      />
+                    {order.order_url}
+                  </a>
+                </td>
+                <td>{order.orderer}</td>
+                <td>
+                  <div className="flex items-center justify-center">
+                    <div
+                      className={`p-1 ${convertStatusText(order.status).color}`}
+                    >
+                      {convertStatusText(order.status).text}
                     </div>
-                  )}
-                </div>
+                    {order.status === OrderStatus.OrderChecking && (
+                      <div className="flex gap-1">
+                        <MdCancel
+                          onClick={() => {
+                            updateStatus(
+                              order.order_id,
+                              OrderStatus.OrderCancelled
+                            );
+                          }}
+                          color="red"
+                          size={20}
+                          className="cursor-pointer hover:opacity-75"
+                        />
+                        <MdCheckCircle
+                          onClick={() => {
+                            updateStatus(
+                              order.order_id,
+                              OrderStatus.PaymentCompleted
+                            );
+                          }}
+                          color="green"
+                          size={20}
+                          className="cursor-pointer hover:opacity-75"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td className="p-4" colSpan={6}>
+                주문 내역이 없습니다.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </Section>

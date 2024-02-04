@@ -36,5 +36,10 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-text-fill-color: green !important;
-  transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 500s ease-in-out 0s;
+}
+
+button,
+a {
+  @apply hover:opacity-60;
 }

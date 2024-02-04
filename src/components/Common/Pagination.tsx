@@ -63,6 +63,8 @@ const Pagination = ({
     }
   };
 
+  if (length === 0) return null;
+
   return (
     <div className="n-pagination">
       <button

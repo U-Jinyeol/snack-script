@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/layouts/Header";
 import "windi.css";
-// import "react-datepicker/dist/react-datepicker.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main className="w-full pr-4 py-20">{children}</main>
+        <Header /> <main className="w-full pr-4 py-20">{children}</main>
       </body>
     </html>
   );

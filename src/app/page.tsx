@@ -12,8 +12,12 @@ import {
 } from "@/apis/snack/type";
 import Pagination from "@/components/Common/Pagination";
 import { CONSTANT } from "@/constant";
+import isLogin from "@/utils/isLogin";
+import { useRouter } from "next/navigation";
+import { showWarningAlert } from "@/utils/alert";
 
 const Main = () => {
+  const router = useRouter();
   const [orderList, setOrderList] = useState<GetSnackOrderListResponseData[]>(
     []
   );
@@ -39,10 +43,20 @@ const Main = () => {
   };
 
   useEffect(() => {
-    getSnackOrderList();
-  }, [currentPage]);
+    if (!isLogin()) {
+      showWarningAlert({ text: "로그인이 필요합니다." });
+      router.push("/login");
+    } else {
+      getSnackOrderList();
+    }
+  }, []);
+
+  if (!isLogin()) {
+    return <></>;
+  }
+
   return (
-    <>
+    <div>
       <Head>
         <title>Snack Script</title>
         <meta
@@ -64,7 +78,7 @@ const Main = () => {
           onPageChange={handlePageChange}
         />
       </div>
-    </>
+    </div>
   );
 };
 

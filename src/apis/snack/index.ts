@@ -14,8 +14,8 @@ export const _orderSnack = async (
     const response = await client.post("/snack/order", orderSnackRequestBody);
     showSuccessAlert();
     return response;
-  } catch (error) {
-    showErrorAlert();
+  } catch (error: any) {
+    showErrorAlert({ text: error.message });
     return null;
   }
 };
@@ -45,8 +45,8 @@ export const _updateSnackOrderStatus = async (
     );
     showSuccessAlert({ text: "상태 변경에 성공하셨습니다." });
     return response;
-  } catch (error) {
-    showErrorAlert({ text: "상태 변경 실패" });
+  } catch (error: any) {
+    showErrorAlert({ text: error.message });
     return null;
   }
 };

@@ -3,8 +3,12 @@ import { useState } from "react";
 import Input from "../Common/Input";
 import CommonButton from "../Common/Button";
 import { showWarningAlert } from "@/utils/alert";
+import { _signUp } from "@/apis/auth";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,7 +45,7 @@ const SignUpForm = () => {
     return password === confirmPassword;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
@@ -52,7 +56,14 @@ const SignUpForm = () => {
       return showWarningAlert({ text: "입력한 정보를 확인해주세요." });
     }
 
-    console.log("Form submitted!");
+    const result = await _signUp({
+      email,
+      password,
+      confirm_password: confirmPassword,
+    });
+    if (result?.success) {
+      router.push("/login");
+    }
   };
 
   return (
@@ -63,7 +74,7 @@ const SignUpForm = () => {
         <div>
           <Input
             label="Email"
-            id="signup-email"
+            id="signup-current-email"
             value={email}
             onChange={handleEmailChange}
           />
@@ -79,7 +90,7 @@ const SignUpForm = () => {
         <div>
           <Input
             label="Password"
-            id="signup-password"
+            id="signup-current-password"
             value={password}
             onChange={handlePasswordChange}
             type="password"

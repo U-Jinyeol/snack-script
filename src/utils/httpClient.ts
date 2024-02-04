@@ -1,6 +1,7 @@
+import { cookies } from "next/headers";
 import { stringify } from "querystring";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL + "api";
+const apiUrl = "http://localhost:8080/" + "api";
 
 export enum HttpMethod {
   GET = "GET",
@@ -22,10 +23,14 @@ async function httpClient<T>(
   data?: Object,
   queryParams?: Record<string, string | number | boolean>
 ): Promise<HttpResponse> {
-  const headers = {
+  const headers: { [key: string]: string } = {
     "Content-Type": "application/json",
   };
 
+  const token = cookies().get("token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
   const query = queryParams ? `?${stringify(queryParams)}` : "";
 
   const config = {

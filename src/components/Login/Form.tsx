@@ -3,8 +3,12 @@ import { useState } from "react";
 import Input from "../Common/Input";
 import CommonButton from "../Common/Button";
 import { showWarningAlert } from "@/utils/alert";
+import { _signIn } from "@/apis/auth";
+import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,7 +34,7 @@ const LoginForm = () => {
     return regex.test(password);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -41,7 +45,12 @@ const LoginForm = () => {
       return showWarningAlert({ text: "입력한 정보를 확인해주세요." });
     }
 
-    console.log("Login form submitted!");
+    const result = await _signIn({ email, password });
+    if (result?.success) {
+      cookies().set("token", result.data.token);
+
+      router.push("/");
+    }
   };
 
   return (
@@ -52,7 +61,7 @@ const LoginForm = () => {
         <div>
           <Input
             label="Email"
-            id="login-email"
+            id="signin-current-email"
             value={email}
             onChange={handleEmailChange}
           />
@@ -68,7 +77,7 @@ const LoginForm = () => {
         <div>
           <Input
             label="Password"
-            id="login-password"
+            id="signin-current-password"
             value={password}
             onChange={handlePasswordChange}
             type="password"
@@ -84,10 +93,6 @@ const LoginForm = () => {
 
         <CommonButton type="submit" label="Login" />
       </form>
-      <div className="mb-4">
-        <p className="text-center">or</p>
-      </div>
-      <CommonButton label="Signup" />
     </div>
   );
 };
