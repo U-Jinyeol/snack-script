@@ -41,3 +41,10 @@ export enum OrderStatus {
   PaymentCompleted = 2, // 결제 완료
   OrderCancelled = 3, // 주문 취소
 }
+
+export type SnackOrderOgTag = {
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+};

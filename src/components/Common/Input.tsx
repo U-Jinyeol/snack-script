@@ -6,14 +6,24 @@ type InputProps = {
   maxLength?: number;
   value: string;
   type?: string;
+  placeholder?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input = ({ label, id, maxLength, value, type, onChange }: InputProps) => {
+const Input = ({
+  label,
+  id,
+  maxLength,
+  value,
+  type,
+  placeholder,
+  onChange,
+}: InputProps) => {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
       <input
+        placeholder={placeholder ?? label}
         maxLength={maxLength ?? 100}
         type={type ?? "text"}
         id={id}

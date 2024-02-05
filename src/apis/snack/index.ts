@@ -50,3 +50,15 @@ export const _updateSnackOrderStatus = async (
     return null;
   }
 };
+
+export const _getSnackOrderThumbnail = async (
+  url: string
+): Promise<HttpResponse | null> => {
+  try {
+    const response = await client.post("/snack/order/thumbnail", { url });
+    return response;
+  } catch (error: any) {
+    showErrorAlert({ text: error.message });
+    return null;
+  }
+};

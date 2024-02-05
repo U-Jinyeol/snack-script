@@ -59,4 +59,29 @@ const updateOrderStatus = async (req, res, next) => {
   }
 };
 
-export default { createSnackOrder, getSnackOrderList, updateOrderStatus };
+const getSnackOrderThumbnail = async (req, res, next) => {
+  try {
+    const { url } = req.body;
+
+    const thumbnail = await snackOrderService.getSnackOrderThumbnail(url);
+    res.status(200).json({
+      success: thumbnail ? true : false,
+      message: "SUCCESS",
+      data: thumbnail,
+      code: 100009,
+    });
+  } catch (error) {
+    res.status(200).json({
+      success: false,
+      message: "FAIL",
+      code: 100009,
+    });
+  }
+};
+
+export default {
+  createSnackOrder,
+  getSnackOrderList,
+  updateOrderStatus,
+  getSnackOrderThumbnail,
+};

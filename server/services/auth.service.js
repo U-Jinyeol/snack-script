@@ -16,7 +16,6 @@ const signIn = async (email, password) => {
   }
 
   const token = createAccessToken(user.email);
-  console.log("token: ", token);
   if (!token) {
     throw new Error("토큰 생성 실패");
   }

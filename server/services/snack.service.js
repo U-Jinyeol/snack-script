@@ -2,6 +2,8 @@ import snackOrderRepository from "../repositories/snack.repository.js";
 import SnackOrder from "../models/snack-order.model.js";
 import { v4 as uuidv4 } from "uuid";
 import authRepository from "../repositories/auth.repository.js";
+import axios from "axios";
+import cheerio from "cheerio";
 
 export const orderStatus = {
   OrderChecking: 1, // 주문 확인중
@@ -89,4 +91,39 @@ const updateOrderStatus = async (order_id, status, updated_memo, email) => {
   }
 };
 
-export default { createSnackOrder, getSnackOrderList, updateOrderStatus };
+const getSnackOrderThumbnail = async (productUrl) => {
+  try {
+    const html = await getHtml(productUrl);
+    const $ = cheerio.load(html.data);
+
+    const title = $("meta[property='og:title']").attr("content");
+    const description = $("meta[property='og:description']").attr("content");
+    const image = $("meta[property='og:image']").attr("content");
+    const url = $("meta[property='og:url']").attr("content");
+
+    return { title, description, image: `https:${image}`, url };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const getHtml = async (url) => {
+  const headers = {
+    "User-Agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "Accept-Language": "ko-KR,ko;q=0.8,en-US;q=0.5,en;q=0.3",
+  };
+
+  try {
+    return await axios.get(url, { headers });
+  } catch (error) {
+    console.error("error", error);
+  }
+};
+
+export default {
+  createSnackOrder,
+  getSnackOrderList,
+  updateOrderStatus,
+  getSnackOrderThumbnail,
+};
