@@ -18,6 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <meta
+        httpEquiv="Content-Security-Policy"
+        content="upgrade-insecure-requests"
+      />
       <body className={inter.className}>
         <Header /> <main className="w-full pr-4 py-20">{children}</main>
       </body>
