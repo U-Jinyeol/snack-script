@@ -5,7 +5,7 @@ import CommonButton from "../Common/Button";
 import { showWarningAlert } from "@/utils/alert";
 import { _signIn } from "@/apis/auth";
 import { useRouter } from "next/navigation";
-import { cookies } from "next/headers";
+import { setCookie } from "cookies-next";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -47,7 +47,7 @@ const LoginForm = () => {
 
     const result = await _signIn({ email, password });
     if (result?.success) {
-      cookies().set("token", result.data.token);
+      setCookie("token", result.data.token);
 
       router.push("/");
     }

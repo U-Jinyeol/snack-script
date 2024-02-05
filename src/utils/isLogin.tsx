@@ -1,10 +1,7 @@
-import { cookies } from "next/headers";
+import { hasCookie } from "cookies-next";
 
 const isLogin = () => {
-  const cookieStore = cookies();
-
-  const token = cookieStore.get("token");
-  return !!token;
+  return hasCookie("token");
 };
 
 export default isLogin;

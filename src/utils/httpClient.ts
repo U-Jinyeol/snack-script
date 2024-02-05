@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
 import { stringify } from "querystring";
 
 const apiUrl = "http://localhost:8080/" + "api";
@@ -27,7 +27,7 @@ async function httpClient<T>(
     "Content-Type": "application/json",
   };
 
-  const token = cookies().get("token");
+  const token = getCookie("token");
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
