@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-deploy": "next build && next export"
+    "vercel-deploy-test": "next build && next export"
   },
   "dependencies": {
     "next": "14.0.4",
