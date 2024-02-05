@@ -1,7 +1,7 @@
 import { getCookie } from "cookies-next";
 import { stringify } from "querystring";
 
-const apiUrl = "http://localhost:8080/" + "api";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL + "api";
 
 export enum HttpMethod {
   GET = "GET",
