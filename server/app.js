@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
-import connect from "./models/index.js";
-import api from "./routes/index.js";
-import dotenv from "dotenv";
+import express from 'express';
+import cors from 'cors';
+import connect from './models/index.js';
+import api from './routes/index.js';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -11,14 +11,14 @@ const port = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: '*', //process.env.CLIENT_URL,
     credentials: true,
   })
 );
 
 app.use(express.json());
 
-app.use("/api", api);
+app.use('/api', api);
 connect();
 
 app.use(function (err, _, res, __) {
@@ -27,5 +27,5 @@ app.use(function (err, _, res, __) {
 });
 
 app.listen(port, () => {
-  console.log(port, "포트로 서버가 열렸어요!");
+  console.log(port, '포트로 서버가 열렸어요!');
 });
