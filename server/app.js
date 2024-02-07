@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://snack-script.vercel.app/"],
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );

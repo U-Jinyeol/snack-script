@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const connect = () => {
-  mongoose
-    .connect("mongodb://localhost:27017/snack-order")
-    .catch((err) => console.log(err));
+  console.log(process.env.MONGO_DB_URL);
+  mongoose.connect(process.env.MONGO_DB_URL).catch((err) => console.log(err));
 };
 
 mongoose.connection.on("error", (err) => {
