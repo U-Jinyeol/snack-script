@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/api', api);
 connect();
 
-app.morgan('combined');
+app.use(morgan('combined'));
 
 app.use(function (err, _, res, __) {
   res.status(500).json({ ok: false, message: err.message });
