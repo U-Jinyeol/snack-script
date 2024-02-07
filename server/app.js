@@ -3,6 +3,7 @@ import cors from 'cors';
 import connect from './models/index.js';
 import api from './routes/index.js';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use(express.json());
 
 app.use('/api', api);
 connect();
+
+app.morgan('combined');
 
 app.use(function (err, _, res, __) {
   res.status(500).json({ ok: false, message: err.message });
