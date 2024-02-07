@@ -22,7 +22,6 @@ app.use('/api', api);
 connect();
 
 app.use(function (err, _, res, __) {
-  console.error(err.stack);
   res.status(500).json({ ok: false, message: err.message });
 });
 
