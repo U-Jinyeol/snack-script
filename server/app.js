@@ -7,11 +7,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: "https://snack-script.vercel.app/",
+    origin: ["http://localhost:3000", "https://snack-script.vercel.app/"],
     credentials: true,
   })
 );
