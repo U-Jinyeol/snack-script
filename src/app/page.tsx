@@ -23,6 +23,7 @@ const Main = () => {
   );
   const [totalCount, setTotalCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const getSnackOrderList = async () => {
     const result = await _getSnackOrderList({
@@ -44,14 +45,16 @@ const Main = () => {
 
   useEffect(() => {
     if (!isLogin()) {
+      setIsLoggedIn(false);
       showWarningAlert({ text: "로그인이 필요합니다." });
       router.push("/login");
     } else {
+      setIsLoggedIn(true);
       getSnackOrderList();
     }
   }, []);
 
-  if (!isLogin()) {
+  if (!isLoggedIn) {
     return <></>;
   }
 
