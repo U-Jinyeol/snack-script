@@ -8,7 +8,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "snack script",
-  description: "간식 주문창",
+  description: "어떤 간식을 원하시나요?",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://snack-script.vercel.app/",
+    images: "/og-image.png",
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +25,8 @@ export default function RootLayout({
   return (
     <html>
       <body className={inter.className}>
-        <Header /> <main className="w-full pr-4 py-20">{children}</main>
+        <Header />
+        <main className="w-full pr-4 py-20">{children}</main>
       </body>
     </html>
   );

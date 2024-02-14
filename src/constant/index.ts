@@ -1,4 +1,3 @@
-export const CONSTANT = {
-  initialPage: 1,
-  defaultSize: 10,
-};
+import * as DEFAULT from "./default";
+
+export { DEFAULT };

@@ -12,7 +12,7 @@ export const _orderSnack = async (
 ): Promise<HttpResponse | null> => {
   try {
     const response = await client.post("/snack/order", orderSnackRequestBody);
-    showSuccessAlert();
+    showSuccessAlert({ text: "주문에 성공하셨습니다." });
     return response;
   } catch (error: any) {
     showErrorAlert({ text: error.message });

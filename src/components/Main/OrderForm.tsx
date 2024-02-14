@@ -8,6 +8,8 @@ import { showWarningAlert } from "@/utils/alert";
 import { OrderSnackRequestBody, SnackOrderOgTag } from "@/apis/snack/type";
 import MacbookAnimation from "../Common/MacbookAnimation";
 import CommonButton from "../Common/Button";
+import { DEFAULT } from "@/constant";
+import EmptyImage from "../Common/EmptyImage";
 
 type MainProps = {
   onSubmit: (orderSnackBody: OrderSnackRequestBody) => void;
@@ -30,6 +32,16 @@ const OrderForm = ({ onSubmit }: MainProps) => {
     event: ChangeEvent<HTMLInputElement>
   ): void => {
     const link: string = event.target.value;
+
+    // if (
+    //   link.trim() &&
+    //   !link.includes(DEFAULT.SITE_NAME.GMARKET) &&
+    //   link.includes(DEFAULT.SITE_NAME.HTTPS)
+    // ) {
+    //   showWarningAlert({
+    //     text: "지마켓에 없을시에만 타 사이트를 이용해주시기 바랍니다.",
+    //   });
+    // }
 
     getSnackOrderThumbnail(link);
     setOrderUrl(link);
@@ -69,6 +81,10 @@ const OrderForm = ({ onSubmit }: MainProps) => {
     }
   };
 
+  const imageErrorHandler = (event: any) => {
+    event.target.src = DEFAULT.IMAGE.EMPTY;
+  };
+
   return (
     <Section title={sectionTitle}>
       <MacbookAnimation />
@@ -95,13 +111,25 @@ const OrderForm = ({ onSubmit }: MainProps) => {
         <div className="max-w-600px">
           <Input
             label="Snack Link"
+            placeholder="지마켓 먼저 확인! 지마켓에 없을 경우 다른 사이트 이용!"
             id="snackLink"
             maxLength={500}
             value={orderUrl}
             onChange={handleSnackLinkChange}
           />
+          <div className="mt-4px">
+            <a
+              href="https://www.gmarket.co.kr/n/smiledelivery"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline text-sm"
+            >
+              지마켓 스마일배송으로 이동
+            </a>
+          </div>
+
           <div className="w-full border border-gray-600 mt-4 p-2">
-            {isOgInfo ? (
+            {
               <a
                 href={ogInfo?.url}
                 target="_blank"
@@ -112,20 +140,18 @@ const OrderForm = ({ onSubmit }: MainProps) => {
                   src={ogInfo.image}
                   alt="snack-order-thumbnail"
                   className="w-32 h-32 object-cover"
+                  onError={imageErrorHandler}
                 />
-                <div>
-                  <p className="text-lg font-bold">{ogInfo.title}</p>
-                  <p className="text-gray-600">{ogInfo.description}</p>
-                </div>
+                {ogInfo.title ? (
+                  <div>
+                    <p className="text-lg font-bold">{ogInfo.title}</p>
+                    <p className="text-gray-600">{ogInfo.description}</p>
+                  </div>
+                ) : (
+                  <p>What's your snack</p>
+                )}
               </a>
-            ) : (
-              <div className="w-full flex items-center gap-4">
-                <div className="flex justify-center items-center w-32 h-32 bg-gray-700">
-                  No Image
-                </div>
-                <p>What's your product</p>
-              </div>
-            )}
+            }
           </div>
         </div>
 

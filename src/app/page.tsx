@@ -11,7 +11,7 @@ import {
   OrderSnackRequestBody,
 } from "@/apis/snack/type";
 import Pagination from "@/components/Common/Pagination";
-import { CONSTANT } from "@/constant";
+import { DEFAULT } from "@/constant";
 import isLogin from "@/utils/isLogin";
 import { useRouter } from "next/navigation";
 import { showWarningAlert } from "@/utils/alert";
@@ -27,7 +27,7 @@ const Main = () => {
   const getSnackOrderList = async () => {
     const result = await _getSnackOrderList({
       page: currentPage,
-      size: CONSTANT.defaultSize,
+      size: DEFAULT.PAGING.size,
     });
     setOrderList(result?.data.snackOrderList);
     setTotalCount(result?.data.totalCount);
@@ -72,7 +72,7 @@ const Main = () => {
         <MainOrderList getOrderList={getSnackOrderList} orderList={orderList} />
         <Pagination
           currentPage={currentPage}
-          size={CONSTANT.defaultSize}
+          size={DEFAULT.PAGING.size}
           length={totalCount}
           visible={10}
           onPageChange={handlePageChange}
