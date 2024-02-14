@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: "https://snack-script.vercel.app/",
-    images: "/og-image.png",
+    images: "/og-image.jpeg",
   },
 };
 
