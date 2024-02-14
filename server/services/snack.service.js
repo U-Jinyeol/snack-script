@@ -93,6 +93,10 @@ const updateOrderStatus = async (order_id, status, updated_memo, email) => {
 
 const getSnackOrderThumbnail = async (productUrl) => {
   try {
+    if (!productUrl.trim()) {
+      return;
+    }
+
     const html = await getHtml(productUrl);
     const $ = cheerio.load(html.data);
 
