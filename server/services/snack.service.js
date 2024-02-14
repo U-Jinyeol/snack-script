@@ -101,7 +101,19 @@ const getSnackOrderThumbnail = async (productUrl) => {
     const image = $("meta[property='og:image']").attr("content");
     const url = $("meta[property='og:url']").attr("content");
 
-    return { title, description, image: `https:${image}`, url };
+    const convertImageUrl = (image) => {
+      if (image.startsWith("//")) {
+        return `https:${image}`;
+      }
+
+      if (!image.includes("https://") || !image.includes("http://") {
+        return `https://${image}`;
+      }
+
+      return image;
+    };
+
+    return { title, description, image: convertImageUrl(image), url };
   } catch (error) {
     throw new Error(error.message);
   }
