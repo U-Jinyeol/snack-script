@@ -64,7 +64,7 @@ const OrderList = ({ orderList, getOrderList }: OrderListProps) => {
             orderList.map((order, index) => (
               <tr key={order.order_id}>
                 <td>{index + 1}</td>
-                <td>{formatDate(order.created_at)}</td>
+                <td>{order.created_at}</td>
                 <td>{order.snack_name}</td>
                 <td className="text-left max-w-xs px-2 whitespace-nowrap truncate">
                   <a
