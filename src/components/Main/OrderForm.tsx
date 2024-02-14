@@ -55,6 +55,12 @@ const OrderForm = ({ onSubmit }: MainProps) => {
       return showWarningAlert({ text: "올바른 구매 링크를 넣어주세요" });
     }
 
+    if (!orderUrl.includes(DEFAULT.SITE_NAME.HTTPS)) {
+      return showWarningAlert({
+        text: "https로 이루어진 구매 링크를 넣어주세요",
+      });
+    }
+
     const orderSnackBody = {
       snackName,
       orderUrl,
