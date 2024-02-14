@@ -32,13 +32,13 @@ const OrderForm = ({ onSubmit }: MainProps) => {
     event: ChangeEvent<HTMLInputElement>
   ): void => {
     const link: string = event.target.value;
+    setOrderUrl(link);
 
     if (link.trim() || !link.includes(DEFAULT.SITE_NAME.HTTPS)) {
       return;
     }
 
     getSnackOrderThumbnail(link);
-    setOrderUrl(link);
   };
 
   const handleSubmit = async (
