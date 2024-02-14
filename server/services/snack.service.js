@@ -15,7 +15,7 @@ const createSnackOrder = async (snackName, orderUrl, email) => {
   try {
     const currentDate = new Date();
     // const koreanDate = new Date(currentDate.getTime() + 9 * 60 * 60 * 1000);
-    const formattedDate = koreanDate.toISOString();
+    const formattedDate = currentDate.toISOString();
 
     const newSnackOrder = new SnackOrder({
       created_at: formattedDate,
