@@ -59,7 +59,7 @@ const SignUpForm = () => {
 
     if (!email.includes(DEFAULT.ACCOUNT.COMPANY)) {
       return showWarningAlert({
-        text: `${DEFAULT.ACCOUNT.COMPANY} 가입할 수 있습니다.`,
+        text: `${DEFAULT.ACCOUNT.COMPANY} 계정으로 가입할 수 있습니다.`,
       });
     }
 
