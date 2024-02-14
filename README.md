@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# snack-scaript (v1.0.0)
+사내 간식 주문의 효율적인 주문 관리 서비스
+<br/>
+<br/>
+<img src="https://ifh.cc/g/aqmfp9.jpg" alt="snack-scaript Logo" width="300">
+<br><br>
+## 소개
 
-## Getting Started
+**snack-scaript**는 회사 내에서 간식 주문을 일일히 슬랙 DM을 통해 받는 총무를 위해 개발된 간식 관리 서비스입니다.
+이 서비스를 통해 효율적인 간식 주문 및 관리를 해보세요
+<br><br>
+## 주요 기능
 
-First, run the development server:
+- 간식 주문 관리
+- 회원가입 / 로그인
+- 유저 롤(ADMIN,USER)
+<br><br>
+## 사용 기술 스택
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 프론트엔드
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Next.js 14](https://nextjs.org/) - 리액트 기반의 프레임워크
+- [TypeScript](https://www.typescriptlang.org/) - 정적 타입 언어
+<br><br>
+### 백엔드
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Express.js](https://expressjs.com/) - 웹 애플리케이션 프레임워크
+- [MongoDB](https://www.mongodb.com/) - NoSQL 데이터베이스
+<br><br>
+## 로컬 개발 환경 설정
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. 저장소를 클론합니다.
+   ```bash
+   git clone https://github.com/your-username/snack-scaript.git
+   cd snack-scaript
 
-## Learn More
+2. 프론트엔드 / 백엔드 각각의 패키지 설치 및 실행
+    ```bash
+   // frontend
+   npm install
+   npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+   // backend
+   cd server
+   npm install
+   npm run start
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<br><br>
+## 최신 버전
+현재 프로젝트의 최신 버전: v1.0.0
