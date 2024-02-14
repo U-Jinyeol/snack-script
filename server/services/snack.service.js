@@ -106,8 +106,8 @@ const getSnackOrderThumbnail = async (productUrl) => {
         return `https:${image}`;
       }
 
-      if (!image.includes("https://") || !image.includes("http://")) {
-        return `https://${image}`;
+      if (image.startsWith("https") || image.startsWith("http")) {
+        return image;
       }
 
       return image;
