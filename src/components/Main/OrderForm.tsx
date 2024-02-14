@@ -33,15 +33,9 @@ const OrderForm = ({ onSubmit }: MainProps) => {
   ): void => {
     const link: string = event.target.value;
 
-    // if (
-    //   link.trim() &&
-    //   !link.includes(DEFAULT.SITE_NAME.GMARKET) &&
-    //   link.includes(DEFAULT.SITE_NAME.HTTPS)
-    // ) {
-    //   showWarningAlert({
-    //     text: "지마켓에 없을시에만 타 사이트를 이용해주시기 바랍니다.",
-    //   });
-    // }
+    if (link.trim() || !link.includes(DEFAULT.SITE_NAME.HTTPS)) {
+      return;
+    }
 
     getSnackOrderThumbnail(link);
     setOrderUrl(link);
@@ -137,12 +131,12 @@ const OrderForm = ({ onSubmit }: MainProps) => {
                 className="w-full flex items-center gap-4"
               >
                 <img
-                  src={ogInfo.image}
+                  src={ogInfo.image ?? DEFAULT.IMAGE.EMPTY}
                   alt="snack-order-thumbnail"
                   className="w-32 h-32 object-cover"
                   onError={imageErrorHandler}
                 />
-                {ogInfo.title ? (
+                {isOgInfo ? (
                   <div>
                     <p className="text-lg font-bold">{ogInfo.title}</p>
                     <p className="text-gray-600">{ogInfo.description}</p>
