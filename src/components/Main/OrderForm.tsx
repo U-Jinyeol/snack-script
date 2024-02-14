@@ -34,7 +34,8 @@ const OrderForm = ({ onSubmit }: MainProps) => {
     const link: string = event.target.value;
     setOrderUrl(link);
 
-    if (link.trim() || !link.includes(DEFAULT.SITE_NAME.HTTPS)) {
+    if (!link.trim() || !link.includes(DEFAULT.SITE_NAME.HTTPS)) {
+      setIsOgInfo(false);
       return;
     }
 
@@ -123,12 +124,17 @@ const OrderForm = ({ onSubmit }: MainProps) => {
           </div>
 
           <div className="w-full border border-gray-600 mt-4 p-2">
-            {
+            {isOgInfo ? (
               <a
                 href={ogInfo?.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center gap-4"
+                onClick={(e) => {
+                  if (!isOgInfo) {
+                    e.preventDefault();
+                  }
+                }}
               >
                 <img
                   src={ogInfo.image ?? DEFAULT.IMAGE.EMPTY}
@@ -136,16 +142,19 @@ const OrderForm = ({ onSubmit }: MainProps) => {
                   className="w-32 h-32 object-cover"
                   onError={imageErrorHandler}
                 />
-                {isOgInfo ? (
-                  <div>
-                    <p className="text-lg font-bold">{ogInfo.title}</p>
-                    <p className="text-gray-600">{ogInfo.description}</p>
-                  </div>
-                ) : (
-                  <p>What's your snack</p>
-                )}
+                <div>
+                  <p className="text-lg font-bold">{ogInfo.title}</p>
+                  <p className="text-gray-600">{ogInfo.description}</p>
+                </div>
               </a>
-            }
+            ) : (
+              <div className="w-full flex items-center gap-4">
+                <div className="w-32 h-32 object-cover">
+                  <EmptyImage />
+                </div>
+                <p>What's your Snack?</p>
+              </div>
+            )}
           </div>
         </div>
 
