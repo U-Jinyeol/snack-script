@@ -5,6 +5,7 @@ import CommonButton from "../Common/Button";
 import { showWarningAlert } from "@/utils/alert";
 import { _signUp } from "@/apis/auth";
 import { useRouter } from "next/navigation";
+import { DEFAULT } from "@/constant";
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -54,6 +55,12 @@ const SignUpForm = () => {
 
     if (!validateConfirmPassword() || !validateEmail() || !validatePassword()) {
       return showWarningAlert({ text: "입력한 정보를 확인해주세요." });
+    }
+
+    if (!email.includes(DEFAULT.ACCOUNT.COMPANY)) {
+      return showWarningAlert({
+        text: `${DEFAULT.ACCOUNT.COMPANY} 가입할 수 있습니다.`,
+      });
     }
 
     const result = await _signUp({
