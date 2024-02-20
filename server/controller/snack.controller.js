@@ -1,4 +1,5 @@
 import snackOrderService from "../services/snack.service.js";
+import slackController from "./slack.controller.js";
 
 const createSnackOrder = async (req, res, next) => {
   try {
@@ -7,6 +8,7 @@ const createSnackOrder = async (req, res, next) => {
     const { email } = res.locals.user;
 
     await snackOrderService.createSnackOrder(snackName, orderUrl, email);
+
     res.status(200).json({
       success: true,
       message: "SUCCESS",
@@ -49,6 +51,7 @@ const updateOrderStatus = async (req, res, next) => {
       updated_memo,
       email
     );
+
     res.status(200).json({
       success: true,
       message: "SUCCESS",

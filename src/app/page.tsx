@@ -22,7 +22,7 @@ const Main = () => {
     []
   );
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const getSnackOrderList = async () => {
@@ -52,7 +52,7 @@ const Main = () => {
       setIsLoggedIn(true);
       getSnackOrderList();
     }
-  }, []);
+  }, [currentPage]);
 
   if (!isLoggedIn) {
     return <></>;
@@ -78,7 +78,7 @@ const Main = () => {
           size={DEFAULT.PAGING.size}
           length={totalCount}
           visible={10}
-          onPageChange={handlePageChange}
+          onPageChange={(selectPage) => handlePageChange(selectPage)}
         />
       </div>
     </div>

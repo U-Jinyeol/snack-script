@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import authRepository from "../repositories/auth.repository.js";
 import axios from "axios";
 import cheerio from "cheerio";
+import slackController from "../controller/slack.controller.js";
 
 export const orderStatus = {
   OrderChecking: 1, // 주문 확인중
@@ -29,7 +30,13 @@ const createSnackOrder = async (snackName, orderUrl, email) => {
       updated_memo: null,
     });
 
-    return await snackOrderRepository.createSnackOrder(newSnackOrder);
+    await snackOrderRepository.createSnackOrder(newSnackOrder);
+
+    slackController.sendMessageToSlack(
+      `*${
+        email.split("@")[0].toUpperCase() ?? email
+      }* 이 *${snackName}* 을(를) 너무 먹고싶어 하네요! *주문 링크* : ${orderUrl}`
+    );
   } catch (error) {
     throw new Error(error.message);
   }
@@ -66,6 +73,9 @@ const getSnackOrderList = async (page, size, startAt, endAt, status) => {
 
 const updateOrderStatus = async (order_id, status, updated_memo, email) => {
   const user = await authRepository.getUserByUsername(email);
+  const order = await snackOrderRepository.findSnackOrderById(order_id);
+  const statusText =
+    status === orderStatus.PaymentCompleted ? "주문 완료" : "주문 취소";
 
   if (user.level !== "ADMIN") {
     throw new Error("관리자만 주문 상태를 변경할 수 있습니다.");
@@ -86,6 +96,14 @@ const updateOrderStatus = async (order_id, status, updated_memo, email) => {
 
   try {
     await snackOrderRepository.updateOrderStatus(order_id, updateQuery);
+
+    slackController.sendMessageToSlack(
+      `*${
+        email.split("@")[0].toUpperCase() ?? email
+      }* 이 *${order.orderer.toUpperCase()}* 의 *${
+        order.snack_name
+      }* 을(를) *${statusText}* 했습니다.`
+    );
   } catch (error) {
     throw new Error(error.message);
   }

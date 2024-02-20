@@ -33,4 +33,17 @@ const updateOrderStatus = async (order_id, updateQuery) => {
   }
 };
 
-export default { createSnackOrder, getSnackOrderList, updateOrderStatus };
+const findSnackOrderById = async (order_id) => {
+  try {
+    return await SnackOrder.findOne({ order_id });
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export default {
+  createSnackOrder,
+  getSnackOrderList,
+  updateOrderStatus,
+  findSnackOrderById,
+};
