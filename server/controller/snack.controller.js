@@ -1,4 +1,5 @@
 import snackOrderService from "../services/snack.service.js";
+import slackController from "./slack.controller.js";
 
 const createSnackOrder = async (req, res, next) => {
   try {
@@ -7,6 +8,12 @@ const createSnackOrder = async (req, res, next) => {
     const { email } = res.locals.user;
 
     await snackOrderService.createSnackOrder(snackName, orderUrl, email);
+
+    slackController.sendMessageToSlack(
+      email.split("@")[0] ?? email,
+      `님이 *${snackName}* 을 주문했습니다. 주문 링크: ${orderUrl}`
+    );
+
     res.status(200).json({
       success: true,
       message: "SUCCESS",
