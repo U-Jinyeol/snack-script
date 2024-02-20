@@ -9,11 +9,6 @@ const createSnackOrder = async (req, res, next) => {
 
     await snackOrderService.createSnackOrder(snackName, orderUrl, email);
 
-    slackController.sendMessageToSlack(
-      email.split("@")[0] ?? email,
-      `님이 *${snackName}* 을 주문했습니다. 주문 링크: ${orderUrl}`
-    );
-
     res.status(200).json({
       success: true,
       message: "SUCCESS",
@@ -56,6 +51,7 @@ const updateOrderStatus = async (req, res, next) => {
       updated_memo,
       email
     );
+
     res.status(200).json({
       success: true,
       message: "SUCCESS",
