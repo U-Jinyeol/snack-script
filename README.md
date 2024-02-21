@@ -1,4 +1,4 @@
-# snack-scaript (v1.0.0)
+# snack-scaript (v1.0.1)
 사내 간식 주문의 효율적인 주문 관리 서비스
 <br/>
 <br/>
@@ -14,6 +14,7 @@
 - 간식 주문 관리
 - 회원가입 / 로그인
 - 유저 롤(ADMIN,USER)
+- 간식 주문 slack bot 연동
 <br><br>
 ## 사용 기술 스택
 
