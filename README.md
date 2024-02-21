@@ -1,4 +1,4 @@
-# snack-scaript (v1.0.1)
+# snack-scaript (v1.1.0)
 사내 간식 주문의 효율적인 주문 관리 서비스
 <br/>
 <br/>
