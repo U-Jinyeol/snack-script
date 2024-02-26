@@ -35,7 +35,7 @@ const createSnackOrder = async (snackName, orderUrl, email) => {
     slackController.sendMessageToSlack(
       `*${
         email.split("@")[0].toUpperCase() ?? email
-      }* 이 *${snackName}* 을(를) 너무 먹고싶어 하네요! *주문 링크* : ${orderUrl}`
+      }* 님이 *${snackName}* 을(를) 너무 먹고싶어 하네요! *주문 링크* : ${orderUrl}`
     );
   } catch (error) {
     throw new Error(error.message);
@@ -100,7 +100,7 @@ const updateOrderStatus = async (order_id, status, updated_memo, email) => {
     slackController.sendMessageToSlack(
       `*${
         email.split("@")[0].toUpperCase() ?? email
-      }* 이 *${order.orderer.toUpperCase()}* 의 *${
+      }* 님이 *${order.orderer.toUpperCase()}* 님의 *${
         order.snack_name
       }* 을(를) *${statusText}* 했습니다.`
     );
